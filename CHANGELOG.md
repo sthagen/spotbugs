@@ -6,6 +6,10 @@ Currently the versioning policy of this project follows [Semantic Versioning v2.
 
 ## Unreleased - 2020-??-??
 
+## 4.0.0-RC3 - 2020-02-04
+
+This version contains no change, except for the solution for [a deployment problem](https://issues.sonatype.org/browse/MVNCENTRAL-5548).
+
 ## 4.0.0-RC2 - 2020-01-29
 
 ### Fixed
