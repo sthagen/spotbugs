@@ -6,6 +6,12 @@ Currently the versioning policy of this project follows [Semantic Versioning v2.
 
 ## Unreleased - 2020-??-??
 
+## 4.0.0 - 2020-02-15
+
+### Fixed
+
+* [Duplicated word in bug descriptions](https://github.com/spotbugs/spotbugs/commit/0d50f0056d7b34e09b472079120bf5ea2abddc45)
+
 ## 4.0.0-RC3 - 2020-02-04
 
 This version contains no change, except for the solution for [a deployment problem](https://issues.sonatype.org/browse/MVNCENTRAL-5548).
