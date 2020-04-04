@@ -65,23 +65,25 @@ dependencies {
   api 'net.jcip:jcip-annotations:1.0'
   api 'org.dom4j:dom4j:2.1.1'
   implementation 'jaxen:jaxen:1.1.6' // only transitive through dom4j:dom4j:1.6.1, which has an *optional* dependency on jaxen:jaxen.
-  api 'commons-lang:commons-lang:2.6'
+  api 'org.apache.commons:commons-lang3:3.10'
+  api 'org.apache.commons:commons-text:1.8'
   api 'org.slf4j:slf4j-api:1.8.0-beta4'
   implementation 'net.sf.saxon:Saxon-HE:9.9.1-2'
-  logBinding 'org.apache.logging.log4j:log4j-slf4j18-impl:2.11.1'
+  logBinding 'org.apache.logging.log4j:log4j-slf4j18-impl:2.13.1'
 
   // These annotations are repackaged to spotbugs.jar, to keep backward compatibility for Ant task.
   // If they're not repackaged, Ant task will report 'java.lang.ClassNotFoundException: edu.umd.cs.findbugs.annotations.CleanupObligation'
   api project(':spotbugs-annotations')
 
-  testImplementation 'junit:junit:4.12'
-  testImplementation 'org.apache.ant:ant:1.9.4'
-  testImplementation 'org.apache.logging.log4j:log4j-slf4j18-impl:2.11.1'
+  testImplementation 'junit:junit:4.13'
+  testImplementation 'org.apache.ant:ant:1.10.7'
+  testImplementation 'org.apache.logging.log4j:log4j-slf4j18-impl:2.13.1'
   testImplementation sourceSets.gui.output
 
   guiImplementation sourceSets.main.runtimeClasspath
-  guiImplementation 'commons-lang:commons-lang:2.6'
-  guiImplementation 'org.dom4j:dom4j:2.1.0'
+  guiImplementation 'org.apache.commons:commons-lang3:3.10'
+  guiImplementation 'org.apache.commons:commons-text:1.8'
+  guiImplementation 'org.dom4j:dom4j:2.1.1'
   guiCompileOnly 'com.apple:AppleJavaExtensions:1.4'
   guiCompileOnly project(':spotbugs-annotations')
   guiTestImplementation sourceSets.gui.runtimeClasspath
