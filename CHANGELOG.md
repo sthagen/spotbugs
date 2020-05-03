@@ -6,6 +6,8 @@ Currently the versioning policy of this project follows [Semantic Versioning v2.
 
 ## Unreleased - 2020-??-??
 
+## 4.0.2 - 2020-04-15
+
 ### Fixed
 
 * GUI was using older version of jdom2 compared to spotbugs in general, bumped it to match at 2.1.1
@@ -15,11 +17,13 @@ Currently the versioning policy of this project follows [Semantic Versioning v2.
 
 ### Changed
 
+* Upgrade ASM to 8.0.1 which supports Java14
 * Upgraded junit4 to 4.13
 * Upgraded ant to 1.10.7
 * Upgraded log4j2 to 2.13.1
 * Upgraded from commons-lang2 to commons-lang3 3.10
 * Added commons-text 1.8 due to items deprecated in commons-lang3 and moved to this project
+* replaced usage of org.xml.sax.helpers.XMLReaderFactory (deprecated since jdk9) with javax.xml.parsers.SAXParserFactory
 
 ## 4.0.1 - 2020-03-19
 
