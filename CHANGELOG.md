@@ -5,6 +5,51 @@ This is the changelog for SpotBugs. This follows [Keep a Changelog v1.0.0](http:
 Currently the versioning policy of this project follows [Semantic Versioning v2.0.0](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased - 2020-??-??
+### Fixed
+* [A meaningless exception data from `SAXBugCollectionHandler`](https://lgtm.com/projects/g/spotbugs/spotbugs/rev/a77ab08634687b7791e902636996ab6184462693)
+* Use URI for files instead of converting string to URI each time. Fixes tests on Windows.
+
+## 4.1.1 - 2020-07-31
+### Fixed
+* Missing the version of commons-lang3 for Maven ([#1239](https://github.com/spotbugs/spotbugs/issues/1239))
+
+## 4.1.0 - 2020-07-30
+### Added
+* Support custom bug annotation 
+* Experimental support for the SARIF 2.1.0 report ([discuss#95](https://github.com/spotbugs/discuss/issues/95))
+
+### Fixed
+* Fixed not working detector 'CbeckMustOverrideSuperAnnotation' and renamed to 'OverridingMethodsMustInvokeSuperDetector'
+
+### Changed
+* Bump commons-lang3 from 3.10 to 3.11 ([#1231](https://github.com/spotbugs/spotbugs/pull/1231))
+* Bump commons-text from 1.8 to 1.9
+
+## 4.0.6 - 2020-06-23
+### Fixed
+* Use method call instead of reflection to get BCEL frame type ([#1176](https://github.com/spotbugs/spotbugs/issues/1176))
+
+## 4.0.5 - 2020-06-20
+### Fixed
+
+* dependency conflict around apache-commons-lang3 ([#1135](https://github.com/spotbugs/spotbugs/issues/1135))
+* plain.xsl declares it is a 2.0 stylesheet, but it appears to have issues with a 2.0 processor
+* eclipse plugin does not contain `lib/spotbugs.jar`  ([#1158](https://github.com/spotbugs/spotbugs/issues/1158))
+
+### Changed
+
+* Bump up Apache Commons BCEL to the version 6.5.0
+
+## 4.0.4 - 2020-06-09
+### Security
+
+* Update dom4j to 2.1.3 to fix security vulnerability. ([#1122](https://github.com/spotbugs/spotbugs/issues/1122))
+
+## 4.0.3 - 2020-05-13
+
+### Fixed
+
+* Avoid changing the SecurityManager when launched as an IntelliJ IDEA plugin.
 
 ## 4.0.2 - 2020-04-15
 

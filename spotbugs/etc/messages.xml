@@ -166,6 +166,14 @@ This plugin contains all of the standard SpotBugs detectors.
   Detectors
   **********************************************************************
    -->
+  <Detector class="edu.umd.cs.findbugs.detect.OverridingMethodsMustInvokeSuperDetector">
+    <Details>
+<![CDATA[
+<p> Finds overriding methods that must call super.
+</p>
+]]>
+    </Details>
+  </Detector>
   <Detector class="edu.umd.cs.findbugs.detect.FindRoughConstants">
     <Details>
 <![CDATA[
@@ -1657,6 +1665,14 @@ factory pattern to create these objects.</p>
   BugPatterns
   **********************************************************************
    -->
+  <BugPattern type="OVERRIDING_METHODS_MUST_INVOKE_SUPER">
+    <ShortDescription>Super method is annotated with @OverridingMethodsMustInvokeSuper, but the overriding method isn't calling the super method.</ShortDescription>
+    <LongDescription>Super method is annotated with @OverridingMethodsMustInvokeSuper, but {1} isn't calling the super method.</LongDescription>
+    <Details>
+      <![CDATA[
+    <p>Super method is annotated with @OverridingMethodsMustInvokeSuper, but the overriding method isn't calling the super method.</p>
+]]>
+    </Details>  </BugPattern>
   <BugPattern type="CNT_ROUGH_CONSTANT_VALUE">
     <ShortDescription>Rough value of known constant found</ShortDescription>
     <LongDescription>Rough value of {3} found: {2}</LongDescription>
@@ -4329,6 +4345,7 @@ has absolutely no effect.
 This may be leftover marking from a previous version of the code in which the class was transient, or
 it may indicate a misunderstanding of how serialization works.
 </p>
+<p><em>This bug is reported only if special option <tt>reportTransientFieldOfNonSerializableClass</tt> is set.</em></p>
 ]]>
     </Details>
   </BugPattern>
@@ -5600,7 +5617,7 @@ than are different than you would get using <code>.equals(...)</code>.
     <LongDescription>Using pointer equality to compare a {2.givenClass} with a {3.givenClass} in {1}</LongDescription>
     <Details>
 <![CDATA[
-<p> This method uses using pointer equality to compare two references that seem to be of
+<p> This method uses pointer equality to compare two references that seem to be of
 different types.  The result of this comparison will always be false at runtime.
 </p>
 ]]>

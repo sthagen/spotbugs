@@ -28,13 +28,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
@@ -192,10 +197,16 @@ public class SourceFinder implements AutoCloseable {
         @Override
         public SourceFileDataSource getDataSource(final String fileName) {
             return new SourceFileDataSource() {
+                private final URI uri = URI.create(fileName);
 
                 @Override
                 public String getFullFileName() {
                     return fileName;
+                }
+
+                @Override
+                public URI getFullURI() {
+                    return uri;
                 }
 
                 @Override
@@ -343,9 +354,11 @@ public class SourceFinder implements AutoCloseable {
      */
     static class ZipSourceRepository implements SourceRepository {
         ZipFile zipFile;
+        FileSystem zipFileSystem;
 
-        public ZipSourceRepository(@WillCloseWhenClosed ZipFile zipFile) {
+        public ZipSourceRepository(@WillCloseWhenClosed ZipFile zipFile) throws IOException {
             this.zipFile = zipFile;
+            this.zipFileSystem = FileSystems.newFileSystem(Paths.get(zipFile.getName()), null);
         }
 
         @Override
@@ -360,11 +373,12 @@ public class SourceFinder implements AutoCloseable {
 
         @Override
         public SourceFileDataSource getDataSource(String fileName) {
-            return new ZipSourceFileDataSource(zipFile, fileName);
+            return new ZipSourceFileDataSource(zipFile, zipFileSystem, fileName);
         }
 
         @Override
         public void close() throws IOException {
+            zipFileSystem.close();
             zipFile.close();
         }
     }
@@ -401,7 +415,7 @@ public class SourceFinder implements AutoCloseable {
     /**
      * Set the list of source directories.
      */
-    void setSourceBaseList(Iterable<String> sourceBaseList) {
+    public /* visible for testing */ void setSourceBaseList(Iterable<String> sourceBaseList) {
         for (String repos : sourceBaseList) {
             if (repos.endsWith(".zip") || repos.endsWith(".jar") || repos.endsWith(".z0p.gz")) {
                 // Zip or jar archive
@@ -617,5 +631,16 @@ public class SourceFinder implements AutoCloseable {
         for (SourceRepository repo : repositoryList) {
             IO.close(repo);
         }
+    }
+
+    public Optional<URI> getBase(SourceLineAnnotation sourceLineAnnotation) {
+        String relativePath = getPlatformName(sourceLineAnnotation);
+        return getBase(relativePath);
+    }
+
+    public Optional<URI> getBase(String fileName) {
+        return repositoryList.stream()
+                .filter(SourceRepository::isPlatformDependent)
+                .filter(repo -> repo.contains(fileName)).map(repo -> repo.getDataSource("").getFullURI()).findFirst();
     }
 }
