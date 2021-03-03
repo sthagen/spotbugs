@@ -5,6 +5,7 @@ This is the changelog for SpotBugs. This follows [Keep a Changelog v1.0.0](http:
 Currently the versioning policy of this project follows [Semantic Versioning v2.0.0](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased - 2021-??-??
+## 4.2.2 - 2021-03-03
 
 ### Fixed
 * `UWF_NULL_FIELD` doesn't report line number ([#1368](https://github.com/spotbugs/spotbugs/issues/1368))
@@ -12,6 +13,8 @@ Currently the versioning policy of this project follows [Semantic Versioning v2.
 
 ### Changed
 * Bump ASM from 9.0 to 9.1 supporting JDK17
+* Bump commons-lang from 3.11 to 3.12.0
+* Replace org.json:json:20201115 with com.google.code.gson:gson:2.8.6
 
 ## 4.2.1 - 2021-02-04
 
